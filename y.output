@@ -1,0 +1,177 @@
+   0  $accept : rot $end
+
+   1  rot : dealer call_list
+
+   2  dealer : LP BEGIN_CALL RP
+
+   3  call_list : call_list call
+   4            | call
+
+   5  call : call_inner call_inner
+
+   6  call_inner : LP term RP
+
+   7  term : term factor
+   8       | factor
+
+   9  factor : YASAI
+  10         | NINNIKU
+  11         | ABURA
+  12         | KARAME
+
+state 0
+	$accept : . rot $end  (0)
+
+	LP  shift 1
+	.  error
+
+	rot  goto 2
+	dealer  goto 3
+
+
+state 1
+	dealer : LP . BEGIN_CALL RP  (2)
+
+	BEGIN_CALL  shift 4
+	.  error
+
+
+state 2
+	$accept : rot . $end  (0)
+
+	$end  accept
+
+
+state 3
+	rot : dealer . call_list  (1)
+
+	LP  shift 5
+	.  error
+
+	call_inner  goto 6
+	call_list  goto 7
+	call  goto 8
+
+
+state 4
+	dealer : LP BEGIN_CALL . RP  (2)
+
+	RP  shift 9
+	.  error
+
+
+state 5
+	call_inner : LP . term RP  (6)
+
+	YASAI  shift 10
+	NINNIKU  shift 11
+	ABURA  shift 12
+	KARAME  shift 13
+	.  error
+
+	term  goto 14
+	factor  goto 15
+
+
+state 6
+	call : call_inner . call_inner  (5)
+
+	LP  shift 5
+	.  error
+
+	call_inner  goto 16
+
+
+state 7
+	rot : dealer call_list .  (1)
+	call_list : call_list . call  (3)
+
+	LP  shift 5
+	$end  reduce 1
+
+	call_inner  goto 6
+	call  goto 17
+
+
+state 8
+	call_list : call .  (4)
+
+	.  reduce 4
+
+
+state 9
+	dealer : LP BEGIN_CALL RP .  (2)
+
+	.  reduce 2
+
+
+state 10
+	factor : YASAI .  (9)
+
+	.  reduce 9
+
+
+state 11
+	factor : NINNIKU .  (10)
+
+	.  reduce 10
+
+
+state 12
+	factor : ABURA .  (11)
+
+	.  reduce 11
+
+
+state 13
+	factor : KARAME .  (12)
+
+	.  reduce 12
+
+
+state 14
+	call_inner : LP term . RP  (6)
+	term : term . factor  (7)
+
+	RP  shift 18
+	YASAI  shift 10
+	NINNIKU  shift 11
+	ABURA  shift 12
+	KARAME  shift 13
+	.  error
+
+	factor  goto 19
+
+
+state 15
+	term : factor .  (8)
+
+	.  reduce 8
+
+
+state 16
+	call : call_inner call_inner .  (5)
+
+	.  reduce 5
+
+
+state 17
+	call_list : call_list call .  (3)
+
+	.  reduce 3
+
+
+state 18
+	call_inner : LP term RP .  (6)
+
+	.  reduce 6
+
+
+state 19
+	term : term factor .  (7)
+
+	.  reduce 7
+
+
+10 terminals, 8 nonterminals
+13 grammar rules, 20 states
