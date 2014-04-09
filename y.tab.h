@@ -5,7 +5,12 @@
 #define NINNIKU 261
 #define ABURA 262
 #define KARAME 263
-#define BEGIN_CALL 264
+#define ZENMASHI 264
+#define KOBUTA 265
+#define OOBUTA 266
+#define DOUBLE 267
+#define DOUBLE_I 268
+#define BEGIN_CALL 269
 typedef union {
   int hexval;
   char ch;

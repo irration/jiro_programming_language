@@ -18,6 +18,12 @@
   10         | NINNIKU
   11         | ABURA
   12         | KARAME
+  13         | ZENMASHI
+  14         | NUKI
+  15         | KOBUTA
+  16         | OOBUTA
+  17         | DOUBLE
+  18         | DOUBLE_I
 
 state 0
 	$accept : . rot $end  (0)
@@ -63,14 +69,20 @@ state 4
 state 5
 	call_inner : LP . term RP  (6)
 
-	YASAI  shift 10
-	NINNIKU  shift 11
-	ABURA  shift 12
-	KARAME  shift 13
+	NUKI  shift 10
+	YASAI  shift 11
+	NINNIKU  shift 12
+	ABURA  shift 13
+	KARAME  shift 14
+	ZENMASHI  shift 15
+	KOBUTA  shift 16
+	OOBUTA  shift 17
+	DOUBLE  shift 18
+	DOUBLE_I  shift 19
 	.  error
 
-	term  goto 14
-	factor  goto 15
+	term  goto 20
+	factor  goto 21
 
 
 state 6
@@ -79,7 +91,7 @@ state 6
 	LP  shift 5
 	.  error
 
-	call_inner  goto 16
+	call_inner  goto 22
 
 
 state 7
@@ -90,7 +102,7 @@ state 7
 	$end  reduce 1
 
 	call_inner  goto 6
-	call  goto 17
+	call  goto 23
 
 
 state 8
@@ -106,72 +118,114 @@ state 9
 
 
 state 10
+	factor : NUKI .  (14)
+
+	.  reduce 14
+
+
+state 11
 	factor : YASAI .  (9)
 
 	.  reduce 9
 
 
-state 11
+state 12
 	factor : NINNIKU .  (10)
 
 	.  reduce 10
 
 
-state 12
+state 13
 	factor : ABURA .  (11)
 
 	.  reduce 11
 
 
-state 13
+state 14
 	factor : KARAME .  (12)
 
 	.  reduce 12
 
 
-state 14
+state 15
+	factor : ZENMASHI .  (13)
+
+	.  reduce 13
+
+
+state 16
+	factor : KOBUTA .  (15)
+
+	.  reduce 15
+
+
+state 17
+	factor : OOBUTA .  (16)
+
+	.  reduce 16
+
+
+state 18
+	factor : DOUBLE .  (17)
+
+	.  reduce 17
+
+
+state 19
+	factor : DOUBLE_I .  (18)
+
+	.  reduce 18
+
+
+state 20
 	call_inner : LP term . RP  (6)
 	term : term . factor  (7)
 
-	RP  shift 18
-	YASAI  shift 10
-	NINNIKU  shift 11
-	ABURA  shift 12
-	KARAME  shift 13
+	RP  shift 24
+	NUKI  shift 10
+	YASAI  shift 11
+	NINNIKU  shift 12
+	ABURA  shift 13
+	KARAME  shift 14
+	ZENMASHI  shift 15
+	KOBUTA  shift 16
+	OOBUTA  shift 17
+	DOUBLE  shift 18
+	DOUBLE_I  shift 19
 	.  error
 
-	factor  goto 19
+	factor  goto 25
 
 
-state 15
+state 21
 	term : factor .  (8)
 
 	.  reduce 8
 
 
-state 16
+state 22
 	call : call_inner call_inner .  (5)
 
 	.  reduce 5
 
 
-state 17
+state 23
 	call_list : call_list call .  (3)
 
 	.  reduce 3
 
 
-state 18
+state 24
 	call_inner : LP term RP .  (6)
 
 	.  reduce 6
 
 
-state 19
+state 25
 	term : term factor .  (7)
 
 	.  reduce 7
 
 
-10 terminals, 8 nonterminals
-13 grammar rules, 20 states
+15 terminals, 8 nonterminals
+19 grammar rules, 26 states

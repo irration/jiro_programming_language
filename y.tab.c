@@ -38,48 +38,58 @@ typedef union {
 #define NINNIKU 261
 #define ABURA 262
 #define KARAME 263
-#define BEGIN_CALL 264
+#define ZENMASHI 264
+#define KOBUTA 265
+#define OOBUTA 266
+#define DOUBLE 267
+#define DOUBLE_I 268
+#define BEGIN_CALL 269
 #define YYERRCODE 256
 short yylhs[] = {                                        -1,
     0,    4,    5,    5,    6,    1,    2,    2,    3,    3,
-    3,    3,
+    3,    3,    3,    3,    3,    3,    3,    3,
 };
 short yylen[] = {                                         2,
     2,    3,    2,    1,    2,    3,    2,    1,    1,    1,
-    1,    1,
+    1,    1,    1,    1,    1,    1,    1,    1,
 };
 short yydefred[] = {                                      0,
-    0,    0,    0,    0,    0,    0,    0,    4,    2,    9,
-   10,   11,   12,    0,    8,    5,    3,    6,    7,
+    0,    0,    0,    0,    0,    0,    0,    4,    2,   14,
+    9,   10,   11,   12,   13,   15,   16,   17,   18,    0,
+    8,    5,    3,    6,    7,
 };
 short yydgoto[] = {                                       2,
-    6,   14,   15,    3,    7,    8,
+    6,   20,   21,    3,    7,    8,
 };
-short yysindex[] = {                                   -256,
- -253,    0, -247, -246, -254, -247, -247,    0,    0,    0,
-    0,    0,    0, -258,    0,    0,    0,    0,    0,
+short yysindex[] = {                                   -236,
+ -247,    0, -234, -233, -248, -234, -234,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0, -258,
+    0,    0,    0,    0,    0,
 };
 short yyrindex[] = {                                      0,
-    0,    0,    0,    0,    0,    0,   13,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,   24,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,
 };
 short yygindex[] = {                                      0,
-    8,    0,    1,    0,    0,    9,
+   20,    0,    7,    0,    0,   21,
 };
-#define YYTABLESIZE 16
-short yytable[] = {                                      18,
-    1,   10,   11,   12,   13,   10,   11,   12,   13,    5,
-    4,    9,    1,   16,   19,   17,
+#define YYTABLESIZE 28
+short yytable[] = {                                      24,
+   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,
+   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,
+    1,    4,    5,    1,    9,   22,   25,   23,
 };
 short yycheck[] = {                                     258,
-  257,  260,  261,  262,  263,  260,  261,  262,  263,  257,
-  264,  258,    0,    6,   14,    7,
+  259,  260,  261,  262,  263,  264,  265,  266,  267,  268,
+  259,  260,  261,  262,  263,  264,  265,  266,  267,  268,
+  257,  269,  257,    0,  258,    6,   20,    7,
 };
 #define YYFINAL 2
 #ifndef YYDEBUG
 #define YYDEBUG 0
 #endif
-#define YYMAXTOKEN 264
+#define YYMAXTOKEN 269
 #if YYDEBUG
 char *yyname[] = {
 "end-of-file",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -89,7 +99,8 @@ char *yyname[] = {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"LP","RP","NUKI","YASAI",
-"NINNIKU","ABURA","KARAME","BEGIN_CALL",
+"NINNIKU","ABURA","KARAME","ZENMASHI","KOBUTA","OOBUTA","DOUBLE","DOUBLE_I",
+"BEGIN_CALL",
 };
 char *yyrule[] = {
 "$accept : rot",
@@ -105,6 +116,12 @@ char *yyrule[] = {
 "factor : NINNIKU",
 "factor : ABURA",
 "factor : KARAME",
+"factor : ZENMASHI",
+"factor : NUKI",
+"factor : KOBUTA",
+"factor : OOBUTA",
+"factor : DOUBLE",
+"factor : DOUBLE_I",
 };
 #endif
 #if YYDEBUG
@@ -140,7 +157,7 @@ static short   *yyss;
 static short   *yysslim;
 static YYSTYPE *yyvs;
 static int      yystacksize;
-#line 76 "jr.y"
+#line 94 "jr.y"
 
 int yyerror(){
   extern char *yytext;
@@ -157,7 +174,7 @@ int main(void){
     exit(1);
   }
 }
-#line 161 "y.tab.c"
+#line 178 "y.tab.c"
 /* allocate initial stack or double stack size, up to YYMAXDEPTH */
 static int yygrowstack(void)
 {
@@ -400,7 +417,43 @@ case 12:
     yyval.hexval = 8;
   }
 break;
-#line 404 "y.tab.c"
+case 13:
+#line 73 "jr.y"
+{
+    yyval.hexval = 15;
+  }
+break;
+case 14:
+#line 76 "jr.y"
+{
+    yyval.hexval = 0;
+  }
+break;
+case 15:
+#line 79 "jr.y"
+{
+    yyval.hexval = 0;
+  }
+break;
+case 16:
+#line 82 "jr.y"
+{
+    yyval.hexval = 0;
+  }
+break;
+case 17:
+#line 85 "jr.y"
+{
+    yyval.hexval = 0;
+  }
+break;
+case 18:
+#line 88 "jr.y"
+{
+    yyval.hexval = 0;
+  }
+break;
+#line 457 "y.tab.c"
     }
     yyssp -= yym;
     yystate = *yyssp;

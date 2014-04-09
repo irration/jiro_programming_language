@@ -11,7 +11,7 @@
   char ch;
 }
 
-%token LP RP NUKI YASAI NINNIKU ABURA KARAME BEGIN_CALL
+%token LP RP NUKI YASAI NINNIKU ABURA KARAME ZENMASHI KOBUTA OOBUTA DOUBLE DOUBLE_I BEGIN_CALL
 %type <hexval> call_inner term factor
 %type <ch> rot dealer call_list call
 
@@ -69,6 +69,24 @@ factor
   }
   | KARAME {
     $$ = 8;
+  }
+  | ZENMASHI {
+    $$ = 15;
+  }
+  | NUKI {
+    $$ = 0;
+  }
+  | KOBUTA {
+    $$ = 0;
+  }
+  | OOBUTA {
+    $$ = 0;
+  }
+  | DOUBLE {
+    $$ = 0;
+  }
+  | DOUBLE_I {
+    $$ = 0;
   }
   ;
 

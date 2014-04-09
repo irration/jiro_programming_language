@@ -43,6 +43,26 @@ int yywrap(void){
   return RP;
 }
 
+<SENTENCE>"全マシ" {
+  return ZENMASHI;
+}
+
+<SENTENCE>"小ブタ" {
+  return KOBUTA;
+}
+
+<SENTENCE>"大ブタ" {
+  return OOBUTA;
+}
+
+<SENTENCE>"ダブル" {
+  return DOUBLE;
+}
+
+<SENTENCE>"W" {
+  return DOUBLE_I;
+}
+
 <SENTENCE>"ニンニク入れますか？" return BEGIN_CALL;
 
 %%
