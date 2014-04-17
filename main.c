@@ -16,12 +16,7 @@ int main(int argc, char* argv[]){
 
     file_output = fopen("jiro.c", "w");
     yyin = fopen(argv[1], "r");
-
-    if( yyparse() ){
-      puts("できた");
-    } else {
-      puts("だめぽ");
-    }
+    yyparse();
     fclose(yyin);
     fclose(file_output);
   }
