@@ -1,231 +1,296 @@
-   0  $accept : rot $end
+Grammar
 
-   1  rot : dealer call_list
+    0 $accept: rot $end
 
-   2  dealer : LP BEGIN_CALL RP
+    1 rot: dealer call_list
 
-   3  call_list : call_list call
-   4            | call
+    2 dealer: LP BEGIN_CALL RP
 
-   5  call : call_inner call_inner
+    3 call_list: call_list call
+    4          | call
 
-   6  call_inner : LP term RP
+    5 call: call_inner call_inner
 
-   7  term : term factor
-   8       | factor
+    6 call_inner: LP term RP
 
-   9  factor : YASAI
-  10         | NINNIKU
-  11         | ABURA
-  12         | KARAME
-  13         | ZENMASHI
-  14         | NUKI
-  15         | KOBUTA
-  16         | OOBUTA
-  17         | DOUBLE
-  18         | DOUBLE_I
-
+    7 term: term factor
+    8     | factor
+
+    9 factor: YASAI
+   10       | NINNIKU
+   11       | ABURA
+   12       | KARAME
+   13       | ZENMASHI
+   14       | NUKI
+   15       | KOBUTA
+   16       | OOBUTA
+   17       | DOUBLE
+   18       | DOUBLE_I
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+LP (258) 2 6
+RP (259) 2 6
+NUKI (260) 14
+YASAI (261) 9
+NINNIKU (262) 10
+ABURA (263) 11
+KARAME (264) 12
+ZENMASHI (265) 13
+KOBUTA (266) 15
+OOBUTA (267) 16
+DOUBLE (268) 17
+DOUBLE_I (269) 18
+BEGIN_CALL (270) 2
+
+
+Nonterminals, with rules where they appear
+
+$accept (16)
+    on left: 0
+rot (17)
+    on left: 1, on right: 0
+dealer (18)
+    on left: 2, on right: 1
+call_list (19)
+    on left: 3 4, on right: 1 3
+call (20)
+    on left: 5, on right: 3 4
+call_inner (21)
+    on left: 6, on right: 5
+term (22)
+    on left: 7 8, on right: 6 7
+factor (23)
+    on left: 9 10 11 12 13 14 15 16 17 18, on right: 7 8
+
+
 state 0
-	$accept : . rot $end  (0)
 
-	LP  shift 1
-	.  error
+    0 $accept: . rot $end
 
-	rot  goto 2
-	dealer  goto 3
+    LP  shift, and go to state 1
+
+    rot     go to state 2
+    dealer  go to state 3
 
 
 state 1
-	dealer : LP . BEGIN_CALL RP  (2)
 
-	BEGIN_CALL  shift 4
-	.  error
+    2 dealer: LP . BEGIN_CALL RP
+
+    BEGIN_CALL  shift, and go to state 4
 
 
 state 2
-	$accept : rot . $end  (0)
 
-	$end  accept
+    0 $accept: rot . $end
+
+    $end  shift, and go to state 5
 
 
 state 3
-	rot : dealer . call_list  (1)
 
-	LP  shift 5
-	.  error
+    1 rot: dealer . call_list
 
-	call_inner  goto 6
-	call_list  goto 7
-	call  goto 8
+    LP  shift, and go to state 6
+
+    call_list   go to state 7
+    call        go to state 8
+    call_inner  go to state 9
 
 
 state 4
-	dealer : LP BEGIN_CALL . RP  (2)
 
-	RP  shift 9
-	.  error
+    2 dealer: LP BEGIN_CALL . RP
+
+    RP  shift, and go to state 10
 
 
 state 5
-	call_inner : LP . term RP  (6)
 
-	NUKI  shift 10
-	YASAI  shift 11
-	NINNIKU  shift 12
-	ABURA  shift 13
-	KARAME  shift 14
-	ZENMASHI  shift 15
-	KOBUTA  shift 16
-	OOBUTA  shift 17
-	DOUBLE  shift 18
-	DOUBLE_I  shift 19
-	.  error
+    0 $accept: rot $end .
 
-	term  goto 20
-	factor  goto 21
+    $default  accept
 
 
 state 6
-	call : call_inner . call_inner  (5)
 
-	LP  shift 5
-	.  error
+    6 call_inner: LP . term RP
 
-	call_inner  goto 22
+    NUKI      shift, and go to state 11
+    YASAI     shift, and go to state 12
+    NINNIKU   shift, and go to state 13
+    ABURA     shift, and go to state 14
+    KARAME    shift, and go to state 15
+    ZENMASHI  shift, and go to state 16
+    KOBUTA    shift, and go to state 17
+    OOBUTA    shift, and go to state 18
+    DOUBLE    shift, and go to state 19
+    DOUBLE_I  shift, and go to state 20
+
+    term    go to state 21
+    factor  go to state 22
 
 
 state 7
-	rot : dealer call_list .  (1)
-	call_list : call_list . call  (3)
 
-	LP  shift 5
-	$end  reduce 1
+    1 rot: dealer call_list .
+    3 call_list: call_list . call
 
-	call_inner  goto 6
-	call  goto 23
+    LP  shift, and go to state 6
+
+    $default  reduce using rule 1 (rot)
+
+    call        go to state 23
+    call_inner  go to state 9
 
 
 state 8
-	call_list : call .  (4)
 
-	.  reduce 4
+    4 call_list: call .
+
+    $default  reduce using rule 4 (call_list)
 
 
 state 9
-	dealer : LP BEGIN_CALL RP .  (2)
 
-	.  reduce 2
+    5 call: call_inner . call_inner
+
+    LP  shift, and go to state 6
+
+    call_inner  go to state 24
 
 
 state 10
-	factor : NUKI .  (14)
 
-	.  reduce 14
+    2 dealer: LP BEGIN_CALL RP .
+
+    $default  reduce using rule 2 (dealer)
 
 
 state 11
-	factor : YASAI .  (9)
 
-	.  reduce 9
+   14 factor: NUKI .
+
+    $default  reduce using rule 14 (factor)
 
 
 state 12
-	factor : NINNIKU .  (10)
 
-	.  reduce 10
+    9 factor: YASAI .
+
+    $default  reduce using rule 9 (factor)
 
 
 state 13
-	factor : ABURA .  (11)
 
-	.  reduce 11
+   10 factor: NINNIKU .
+
+    $default  reduce using rule 10 (factor)
 
 
 state 14
-	factor : KARAME .  (12)
 
-	.  reduce 12
+   11 factor: ABURA .
+
+    $default  reduce using rule 11 (factor)
 
 
 state 15
-	factor : ZENMASHI .  (13)
 
-	.  reduce 13
+   12 factor: KARAME .
+
+    $default  reduce using rule 12 (factor)
 
 
 state 16
-	factor : KOBUTA .  (15)
 
-	.  reduce 15
+   13 factor: ZENMASHI .
+
+    $default  reduce using rule 13 (factor)
 
 
 state 17
-	factor : OOBUTA .  (16)
 
-	.  reduce 16
+   15 factor: KOBUTA .
+
+    $default  reduce using rule 15 (factor)
 
 
 state 18
-	factor : DOUBLE .  (17)
 
-	.  reduce 17
+   16 factor: OOBUTA .
+
+    $default  reduce using rule 16 (factor)
 
 
 state 19
-	factor : DOUBLE_I .  (18)
 
-	.  reduce 18
+   17 factor: DOUBLE .
+
+    $default  reduce using rule 17 (factor)
 
 
 state 20
-	call_inner : LP term . RP  (6)
-	term : term . factor  (7)
 
-	RP  shift 24
-	NUKI  shift 10
-	YASAI  shift 11
-	NINNIKU  shift 12
-	ABURA  shift 13
-	KARAME  shift 14
-	ZENMASHI  shift 15
-	KOBUTA  shift 16
-	OOBUTA  shift 17
-	DOUBLE  shift 18
-	DOUBLE_I  shift 19
-	.  error
+   18 factor: DOUBLE_I .
 
-	factor  goto 25
+    $default  reduce using rule 18 (factor)
 
 
 state 21
-	term : factor .  (8)
 
-	.  reduce 8
+    6 call_inner: LP term . RP
+    7 term: term . factor
+
+    RP        shift, and go to state 25
+    NUKI      shift, and go to state 11
+    YASAI     shift, and go to state 12
+    NINNIKU   shift, and go to state 13
+    ABURA     shift, and go to state 14
+    KARAME    shift, and go to state 15
+    ZENMASHI  shift, and go to state 16
+    KOBUTA    shift, and go to state 17
+    OOBUTA    shift, and go to state 18
+    DOUBLE    shift, and go to state 19
+    DOUBLE_I  shift, and go to state 20
+
+    factor  go to state 26
 
 
 state 22
-	call : call_inner call_inner .  (5)
 
-	.  reduce 5
+    8 term: factor .
+
+    $default  reduce using rule 8 (term)
 
 
 state 23
-	call_list : call_list call .  (3)
 
-	.  reduce 3
+    3 call_list: call_list call .
+
+    $default  reduce using rule 3 (call_list)
 
 
 state 24
-	call_inner : LP term RP .  (6)
 
-	.  reduce 6
+    5 call: call_inner call_inner .
+
+    $default  reduce using rule 5 (call)
 
 
 state 25
-	term : term factor .  (7)
 
-	.  reduce 7
+    6 call_inner: LP term RP .
+
+    $default  reduce using rule 6 (call_inner)
 
 
-15 terminals, 8 nonterminals
-19 grammar rules, 26 states
+state 26
+
+    7 term: term factor .
+
+    $default  reduce using rule 7 (term)

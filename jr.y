@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "file.h"
 #define YYDEBUG 1
 
 %}
@@ -30,17 +31,14 @@ dealer
   ;
 
 call_list
-  : call_list call {
-    // 暫定
-    $$ = $1;
-  }
+  : call_list call
   | call
   ;
 
 call
   : call_inner call_inner {
     $$ = (char)(($1 * 16) + $2);
-    putchar($$);
+    fputc($$, file_output);
   }
   ;
 
@@ -91,19 +89,3 @@ factor
   ;
 
 %%
-
-int yyerror(){
-  extern char *yytext;
-  fprintf(stderr, "perser error near %s\n", yytext);
-  return 0;
-}
-
-int main(void){
-  extern int yyparse(void);
-  extern FILE *yyin;
-
-  yyin = stdin;
-  if( yyparse() ){
-    exit(1);
-  }
-}
