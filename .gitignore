@@ -1,0 +1,9 @@
+jiro.c
+jiroparse
+lex.yy.c
+lex.yy.o
+main.o
+y.output
+y.tab.c
+y.tab.h
+y.tab.o
